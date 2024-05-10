@@ -1,1 +1,1 @@
-# Luma-Selenium.CS
+# OrangeHRMAutomation-Selenium
