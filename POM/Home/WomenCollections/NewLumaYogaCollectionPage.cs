@@ -8,8 +8,11 @@ namespace Luma_Selenium
 {
     public class NewLumaYogaCollectionPage : Navigator
     {
+        #region LumaYogaLocators
         String pageTitle = "New Luma Yoga Collection";
         String itemsSelector = ".product-item";
+        #endregion
+        #region LumaYogaMethods
         public bool AddYogaItemToCart(String itemname, String size, String color)
         {
             bool pageLoadStatus = VerifyPageOpen(pageTitle);
@@ -30,8 +33,8 @@ namespace Luma_Selenium
             {
                 return false;
             }
-        } 
-    
+        }
+        #endregion
 
     }
 }

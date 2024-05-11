@@ -8,22 +8,34 @@ namespace Luma_Selenium
 {
     public class LumaPerformanceFabricCollectionPage : Navigator
     {
-        String pageTitle = "New Luma Yoga Collection";
-        String itemsSelector = ".product-item";
-        public void AddFabricItemToCart(String itemname, String size, String color)
+        #region lumaPerformanceLocators
+        private String pageTitle = "New Luma Yoga Collection";
+        private String itemsSelector = ".product-item";
+        #endregion
+        #region lumaPerformaceMethods
+        public bool AddFabricItemToCart(String itemname, String size, String color)
         {
-            try
+            bool pageLoadStatus = VerifyPageOpen(pageTitle);
+            if (pageLoadStatus)
             {
-                VerifyPageOpen(pageTitle);
-                ItemAnalyzer.AddToCartByHover(itemname, size, color, itemsSelector, true);
+                DeleteAd();
+                try
+                {
+                    return ItemAnalyzer.AddToCartByHover(itemname, size, color, itemsSelector, true);
+                }
+                catch (Exception ex)
+                {
+                    RaiseException(ex);
+                    return false;
+                }
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine("The page doesnt exist");
+                return false;
             }
-            
-        } 
-    
+        }
+        #endregion
+
 
     }
 }

@@ -241,6 +241,7 @@ namespace Luma_Selenium
             OpenCartMenu();
             IWebElement checkoutButton = WaitForElement(driver, checkoutButtonLocator);
             Click(checkoutButton, "Click on Checkout");
+            DeleteAd();
             ShippingPage shippingPage = new ShippingPage();
             bool shippingStatus = shippingPage.ShippingAddress();
             HandleStatus(shippingStatus, "Successfully Added Address", "Couldn't Add Address");

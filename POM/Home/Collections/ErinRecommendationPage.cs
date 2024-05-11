@@ -8,15 +8,34 @@ namespace Luma_Selenium
 {
     public class ErinRecommendationPage : Navigator
     {
+        #region erinRecommendedLocators
         String pageTitle = "Erin Recommends";
         String itemsSelector = ".product-item";
-        public void AddErinItemToCart(String itemname, String size, String color)
+        #endregion
+        #region erinRecommendedMethods
+        public bool AddErinItemToCart(String itemname, String size, String color)
         {
 
-            VerifyPageOpen(pageTitle);
-            ItemAnalyzer.AddToCartByHover(itemname, size, color, itemsSelector, true);
+            bool pageLoadStatus = VerifyPageOpen(pageTitle);
+            if (pageLoadStatus)
+            {
+                DeleteAd();
+                try
+                {
+                    return ItemAnalyzer.AddToCartByHover(itemname, size, color, itemsSelector, true);
+                }
+                catch (Exception ex)
+                {
+                    RaiseException(ex);
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
-
+        #endregion
 
     }
 }

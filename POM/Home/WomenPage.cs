@@ -12,6 +12,9 @@ namespace Luma_Selenium
         private By navLocator = By.Id("ui-id-4");
         private String pageTitle = "Women";
         private By lumaYogaLocator = By.CssSelector(".block-promo.womens-main");
+        private By womenTeeLocator = By.CssSelector(".block-promo.womens-t-shirts");
+        private By womenPantsLocator = By.CssSelector(".block-promo.womens-pants");
+        private By womenErinLocator = By.CssSelector(".block-promo.womens-erin");
         #endregion
 
         #region WomenMethods
@@ -40,28 +43,83 @@ namespace Luma_Selenium
                 return false;
             }
         }
-        public void WomenTeeCollection(String itemname, String size, String color)
+        public bool WomenTeeCollection(String itemname, String size, String color)
         {
-            InitializePage(navLocator, pageTitle);
-            driver.FindElement(By.CssSelector(".block-promo.womens-t-shirts")).Click();
-            WomenTeesCollectionsPage WomenteesCollectionsPage = new WomenTeesCollectionsPage();
-            WomenteesCollectionsPage.AddTeeItemToCart(itemname, size, color);
+            Step = Test.CreateNode("WomenTeeCollection");
+            bool pageLoadStatus = InitializePage(navLocator, pageTitle);
+            if (pageLoadStatus)
+            {
+                DeleteAd();
+                try
+                {
+                    IWebElement teeCollectionLink = WaitForElement(driver, womenTeeLocator);
+                    Click(teeCollectionLink, "Open Tee Collections");
+                    WomenTeesCollectionsPage WomenteesCollectionsPage = new WomenTeesCollectionsPage();
+                    return WomenteesCollectionsPage.AddTeeItemToCart(itemname, size, color);
+                }
+                catch (Exception ex)
+                {
+                    RaiseException(ex);
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public void WomenPantCollection(String itemname, String size, String color)
+        public bool WomenPantCollection(String itemname, String size, String color)
         {
-            InitializePage(navLocator, pageTitle);
-            driver.FindElement(By.CssSelector(".block-promo.womens-pants")).Click();
-            WomenPantsCollectionPage PantsCollectionsPage = new WomenPantsCollectionPage();
-            PantsCollectionsPage.AddPantsToCart(itemname, size, color);
+            Step = Test.CreateNode("WomenPantCollection");
+            bool pageLoadStatus = InitializePage(navLocator, pageTitle);
+            if (pageLoadStatus)
+            {
+                DeleteAd();
+                try
+                {
+                    IWebElement pantsCollectionLink = WaitForElement(driver, womenPantsLocator);
+                    Click(pantsCollectionLink, "Open Pants Collections");
+                    WomenPantsCollectionPage PantsCollectionsPage = new WomenPantsCollectionPage();
+                    return PantsCollectionsPage.AddPantsToCart(itemname, size, color);
+                }
+                catch (Exception ex)
+                {
+                    RaiseException(ex);
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+            
         }
 
-        public void ErinRecommendCollection(String itemname, String size, String color)
+        public bool ErinRecommendCollection(String itemname, String size, String color)
         {
-            InitializePage(navLocator, pageTitle);
-            driver.FindElement(By.CssSelector(".block-promo.womens-erin")).Click();
-            ErinRecommendationPage erinRecommendationPage = new ErinRecommendationPage();
-            erinRecommendationPage.AddErinItemToCart(itemname, size, color);
+            Step = Test.CreateNode("Women Erin Recommendation");
+            bool pageLoadStatus = InitializePage(navLocator, pageTitle);
+            if (pageLoadStatus)
+            {
+                DeleteAd();
+                try
+                {
+                    IWebElement erinCollectionLink = WaitForElement(driver, womenErinLocator);
+                    Click(erinCollectionLink, "Open Erin Recommended Collections");
+                    ErinRecommendationPage erinRecommendationPage = new ErinRecommendationPage();
+                    return erinRecommendationPage.AddErinItemToCart(itemname, size, color);
+                }
+                catch (Exception ex)
+                {
+                    RaiseException(ex);
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
 

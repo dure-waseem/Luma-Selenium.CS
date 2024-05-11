@@ -8,8 +8,11 @@ namespace Luma_Selenium
 {
     public class PerformanceSportswearPage : Navigator
     {
+        #region performanceLocators
         String pageTitle = "Performance Sportswear New";
         String itemsSelector = ".product-item";
+        #endregion
+        #region performaceMethods
         public bool AddSportswearItemToCart(String itemname, String size, String color)
         {
             bool pageLoadStatus = VerifyPageOpen(pageTitle);
@@ -30,10 +33,7 @@ namespace Luma_Selenium
             {
                 return false;
             }
-
-                
-        } 
-    
-
+        }
+        #endregion
     }
 }

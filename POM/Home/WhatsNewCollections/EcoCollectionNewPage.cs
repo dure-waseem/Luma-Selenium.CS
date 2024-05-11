@@ -8,8 +8,11 @@ namespace Luma_Selenium
 {
     public class EcoCollectionsPage : Navigator
     {
+        #region ecoLocators
         String pageTitle = "Eco Collection New";
         String itemsSelector = ".product-item";
+        #endregion
+        #region ecoMethods
         public bool AddEcoCollectionItemToCart(String itemname, String size, String color)
         {
             bool pageLoadStatus = VerifyPageOpen(pageTitle);
@@ -30,8 +33,8 @@ namespace Luma_Selenium
             {
                 return false;   
             }                
-        } 
-    
+        }
+        #endregion
 
     }
 }
