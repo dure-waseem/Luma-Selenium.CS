@@ -9,32 +9,91 @@ namespace Luma_Selenium
     public class SalesPage : Navigator
     {
         #region SalesLocators
-        By navLocator = By.Id("ui-id-8");
-        String pageTitle = "Sale";
+        private By navLocator = By.Id("ui-id-8");
+        private String pageTitle = "Sale";
+        private By womenSalesLocator = By.CssSelector(".block-promo.sale-main");
+        private By menSalesLocator = By.CssSelector(".block-promo.sale-mens");
+        private By gearStealsLocator = By.CssSelector(".block-promo.sale-women");
 
         #endregion
 
         #region SalesMethods
-        public void WomenSales(String itemname, String size, String color)
+        public bool WomenSales(String itemname, String size, String color)
         {
-            InitializePage(navLocator, pageTitle);
-            driver.FindElement(By.CssSelector(".block-promo.sale-main")).Click();
-            WomenSalesPage womenSalesPage = new WomenSalesPage();
-            womenSalesPage.AddWomenSaleItemToCart(itemname, size, color);
+            Step = Test.CreateNode("Women Sales Item");
+            bool pageLoadStatus = InitializePage(navLocator, pageTitle);
+            if (pageLoadStatus)
+            {
+                DeleteAd();
+                try
+                {
+                    IWebElement womenSalesCollectionLink = WaitForElement(driver, womenSalesLocator);
+                    Click(womenSalesCollectionLink, "Open Women Sales Collections");
+                    WomenSalesPage womenSalesPage = new WomenSalesPage();
+                    return womenSalesPage.AddWomenSaleItemToCart(itemname, size, color);
+                }
+                catch (Exception ex)
+                {
+                    RaiseException(ex);
+                    return false;
+                }
+
+            }
+            else
+            {
+                return false;
+            }
+            
         }
-        public void MenSales(String itemname, String size, String color)
+        public bool MenSales(String itemname, String size, String color)
         {
-            InitializePage(navLocator, pageTitle);
-            driver.FindElement(By.CssSelector(".block-promo.sale-mens")).Click();
-            MenSalesPage MenSalesPage = new MenSalesPage();
-            MenSalesPage.AddMenSaleItemToCart(itemname, size, color);
+            Step = Test.CreateNode("Men Sales Item");
+            bool pageLoadStatus = InitializePage(navLocator, pageTitle);
+            if (pageLoadStatus)
+            {
+                DeleteAd();
+                try
+                {
+                    IWebElement menSalesCollectionLink = WaitForElement(driver, menSalesLocator);
+                    Click(menSalesCollectionLink, "Open Men Sales Collections");
+                    MenSalesPage MenSalesPage = new MenSalesPage();
+                    return MenSalesPage.AddMenSaleItemToCart(itemname, size, color);
+                }
+                catch (Exception ex)
+                {
+                    RaiseException(ex);
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
-        public void GearSteals(String itemname, String size, String color)
+        public bool GearSteals(String itemname, String size, String color)
         {
-            InitializePage(navLocator, pageTitle);
-            driver.FindElement(By.CssSelector(".block-promo.sale-women")).Click();
-            GearPage gearPage = new GearPage();
-            gearPage.PromoItem(itemname, size, color);
+            Step = Test.CreateNode("Gear Steals Item");
+            bool pageLoadStatus = InitializePage(navLocator, pageTitle);
+            if (pageLoadStatus)
+            {
+                DeleteAd();
+                try
+                {
+                    IWebElement gearStealsCollectionLink = WaitForElement(driver, gearStealsLocator);
+                    Click(gearStealsCollectionLink, "Open Gear Steals Collections");
+                    GearPage gearPage = new GearPage();
+                    return gearPage.PromoItem(itemname, size, color);
+                }
+                catch (Exception ex)
+                {
+                    RaiseException(ex);
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
         public void WomenTees(String itemname, String size, String color)
         {

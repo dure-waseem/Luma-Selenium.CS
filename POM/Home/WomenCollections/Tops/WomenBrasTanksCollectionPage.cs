@@ -8,14 +8,33 @@ namespace Luma_Selenium
 {
     public class WomenBrasTanksCollection : Navigator
     {
+        #region womenTanksLocators
         String pageTitle = "Bras & Tanks";
         String itemsSelector = ".item.product.product-item";
-        public void AddBarsTanksItemToCart(String itemname, String size, String color)
+        #endregion
+        #region womenTanksMethods
+        public bool AddBarsTanksItemToCart(String itemname, String size, String color)
         {
-                VerifyPageOpen(pageTitle);
-                ItemAnalyzer.AddToCartByHover(itemname, size, color, itemsSelector, true);
-        } 
-    
+            bool pageLoadStatus = VerifyPageOpen(pageTitle);
+            if (pageLoadStatus)
+            {
+                DeleteAd();
+                try
+                {
+                    return ItemAnalyzer.AddToCartByHover(itemname, size, color, itemsSelector, true);
+                }
+                catch (Exception ex)
+                {
+                    RaiseException(ex);
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        #endregion
 
     }
 }

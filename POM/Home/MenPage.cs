@@ -16,6 +16,7 @@ namespace Luma_Selenium
         private By menPantsLocator = By.CssSelector(".block-promo.mens-pants");
         private By menShortsLocator = By.CssSelector(".block-promo.mens-category-shorts");
         private By lumaTeeLocator = By.CssSelector(".block-promo.mens-category-tees");
+        private By menHoodiesLocator = By.CssSelector(".block-promo.mens-category-hoodies");
         #endregion
 
         #region MenMethods
@@ -145,17 +146,53 @@ namespace Luma_Selenium
                 return false;
             }
         }
-        public void HoodiesAndSweatshirts(String itemname, String size, String color)
+        public bool HoodiesAndSweatshirts(String itemname, String size, String color)
         {
-            InitializePage(navLocator, pageTitle);
-            driver.FindElement(By.CssSelector(".block-promo.mens-category-hoodies")).Click();
-            MenHoodiesAndSweatshirtsPage menHoodiesAndSweatshirtsCollectionPage = new MenHoodiesAndSweatshirtsPage();
-            menHoodiesAndSweatshirtsCollectionPage.AddHoodieItemToCart(itemname, size, color);
+            Step = Test.CreateNode("Add a Hoodie Item From Men");
+            bool pageLoadStatus = InitializePage(navLocator, pageTitle);
+            if (pageLoadStatus)
+            {
+                DeleteAd();
+                try
+                {
+                    IWebElement hoodieCollectionLink = WaitForElement(driver, menHoodiesLocator);
+                    Click(hoodieCollectionLink, "Open Hoodie Collections");
+                    MenHoodiesAndSweatshirtsPage menHoodiesAndSweatshirtsCollectionPage = new MenHoodiesAndSweatshirtsPage();
+                    return menHoodiesAndSweatshirtsCollectionPage.AddHoodieItemToCart(itemname, size, color);
+                }
+                catch (Exception ex)
+                {
+                    RaiseException(ex);
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
-        public void HotSellers(String itemname, String size, String color)
+        public bool HotSellers(String itemname, String size, String color)
         {
-            InitializePage(navLocator, pageTitle);
-            ItemAnalyzer.AddToCartByHover(itemname, size, color, ".product-item", true);
+            Step = Test.CreateNode("Hot Seller Item");
+            bool pageLoadStatus = InitializePage(navLocator, pageTitle);
+            if (pageLoadStatus)
+            {
+                try
+                {
+                    DeleteAd();
+                    return ItemAnalyzer.AddToCartByHover(itemname, size, color, ".product-item", true);
+                }
+                catch (Exception ex)
+                {
+                    RaiseException(ex);
+                    return false;
+                }
+
+            }
+            else
+            {
+                return false;
+            }
         }
         #endregion
 

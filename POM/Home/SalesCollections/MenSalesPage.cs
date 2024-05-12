@@ -8,13 +8,32 @@ namespace Luma_Selenium
 {
     public class MenSalesPage : Navigator
     {
+        #region menSalesLocator
         String pageTitle = "Men Sale";
         String itemsSelector = ".product-item";
-        public void AddMenSaleItemToCart(String itemname, String size, String color)
+        #endregion
+        #region menSalesMethods
+        public bool AddMenSaleItemToCart(String itemname, String size, String color)
         {
-            VerifyPageOpen(pageTitle);
-            ItemAnalyzer.AddToCartByHover(itemname, size, color, itemsSelector, true);
-        } 
-
+            bool pageLoadStatus = VerifyPageOpen(pageTitle);
+            if (pageLoadStatus)
+            {
+                DeleteAd();
+                try
+                {
+                    return ItemAnalyzer.AddToCartByHover(itemname, size, color, itemsSelector, true);
+                }
+                catch (Exception ex)
+                {
+                    RaiseException(ex);
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        #endregion
     }
 }

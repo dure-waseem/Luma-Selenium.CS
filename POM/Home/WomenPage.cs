@@ -15,6 +15,9 @@ namespace Luma_Selenium
         private By womenTeeLocator = By.CssSelector(".block-promo.womens-t-shirts");
         private By womenPantsLocator = By.CssSelector(".block-promo.womens-pants");
         private By womenErinLocator = By.CssSelector(".block-promo.womens-erin");
+        private By womenLumaPantsLocator = By.CssSelector(".block-promo.womens-category-pants");
+        private By womenShortsLocator = By.CssSelector(".block-promo.womens-category-shorts");
+        private By womenTanksLocator = By.CssSelector(".block-promo.womens-category-tanks");
         #endregion
 
         #region WomenMethods
@@ -123,27 +126,82 @@ namespace Luma_Selenium
         }
 
 
-        public void WomenLumaPantsCollection(String itemname, String size, String color)
+        public bool WomenLumaPantsCollection(String itemname, String size, String color)
         {
-            InitializePage(navLocator, pageTitle);
-            driver.FindElement(By.CssSelector(".block-promo.womens-category-pants")).Click();
-            WomenPantsCollectionPage PantsCollectionsPage = new WomenPantsCollectionPage();
-            PantsCollectionsPage.AddPantsToCart(itemname, size, color);
+            Step = Test.CreateNode("Women Pants");
+            bool pageLoadStatus = InitializePage(navLocator, pageTitle);
+            if (pageLoadStatus)
+            {
+                DeleteAd();
+                try
+                {
+                    IWebElement pantsCollectionLink = WaitForElement(driver, womenLumaPantsLocator);
+                    Click(pantsCollectionLink, "Open Women Pants Collections");
+                    WomenPantsCollectionPage PantsCollectionsPage = new WomenPantsCollectionPage();
+                    return PantsCollectionsPage.AddPantsToCart(itemname, size, color);
+                }
+                catch (Exception ex)
+                {
+                    RaiseException(ex);
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
-        public void WomenShortsCollection(String itemname, String size, String color)
+        public bool WomenShortsCollection(String itemname, String size, String color)
         {
-            InitializePage(navLocator, pageTitle);
-            driver.FindElement(By.CssSelector(".block-promo.womens-category-shorts")).Click();
-            WomenShortsCollectionPage shortsCollectionsPage = new WomenShortsCollectionPage();
-            shortsCollectionsPage.AddWomenShortsToCart(itemname, size, color);
+            Step = Test.CreateNode("Women Shorts");
+            bool pageLoadStatus = InitializePage(navLocator, pageTitle);
+            if (pageLoadStatus)
+            {
+                DeleteAd();
+                try
+                {
+                    IWebElement shortsCollectionLink = WaitForElement(driver, womenShortsLocator);
+                    Click(shortsCollectionLink, "Open Women Shorts Collections");
+                    WomenShortsCollectionPage shortsCollectionsPage = new WomenShortsCollectionPage();
+                    return shortsCollectionsPage.AddWomenShortsToCart(itemname, size, color);
+                }
+                catch (Exception ex)
+                {
+                    RaiseException(ex);
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+            
         }
 
-        public void WomenBrasTanksCollection(String itemname, String size, String color)
+        public bool WomenBrasTanksCollection(String itemname, String size, String color)
         {
-            InitializePage(navLocator, pageTitle);
-            driver.FindElement(By.CssSelector(".block-promo.womens-category-tanks")).Click();
-            WomenBrasTanksCollection womenBrasandTanksCollectionPage = new WomenBrasTanksCollection();
-            womenBrasandTanksCollectionPage.AddBarsTanksItemToCart(itemname, size, color);
+            Step = Test.CreateNode("Women Bra/Tank");
+            bool pageLoadStatus = InitializePage(navLocator, pageTitle);
+            if (pageLoadStatus)
+            {
+                DeleteAd();
+                try
+                {
+                    IWebElement womenCollectionLink = WaitForElement(driver, womenTanksLocator);
+                    Click(womenCollectionLink, "Open Women Shorts Collections");
+                    WomenBrasTanksCollection womenBrasandTanksCollectionPage = new WomenBrasTanksCollection();
+                    return womenBrasandTanksCollectionPage.AddBarsTanksItemToCart(itemname, size, color);
+                }
+                catch (Exception ex)
+                {
+                    RaiseException(ex);
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void HotSellers(String itemname, String size, String color)

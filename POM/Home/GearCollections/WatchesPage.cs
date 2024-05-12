@@ -8,12 +8,32 @@ namespace Luma_Selenium
 {
     public class WatchesPage : Navigator
     {
-        String pageTitle = "Watches";
-        String itemsSelector = ".product-item";
-        public void AddWatchItemToCart(String itemname, String size, String color)
+        #region watchLocators
+        private String pageTitle = "Watches";
+        private String itemsSelector = ".product-item";
+        #endregion
+        #region wattchMethods
+        public bool AddWatchItemToCart(String itemname, String size, String color)
         {
-            VerifyPageOpen(pageTitle);
-            ItemAnalyzer.AddToCartByHover(itemname, size, color,itemsSelector, false);
-        } 
+            bool pageLoadStatus = VerifyPageOpen(pageTitle);
+            if (pageLoadStatus)
+            {
+                DeleteAd();
+                try
+                {
+                    return ItemAnalyzer.AddToCartByHover(itemname, size, color, itemsSelector, false);
+                }
+                catch (Exception ex)
+                {
+                    RaiseException(ex);
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        #endregion
     }
 }

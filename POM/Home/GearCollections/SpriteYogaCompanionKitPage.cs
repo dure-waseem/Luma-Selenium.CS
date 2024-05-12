@@ -8,22 +8,34 @@ namespace Luma_Selenium
 {
     public class SpriteYogaCompanionKitPage : Navigator
     {
+        #region spriteYogaLocators
         String pageTitle = "Sprite Yoga Companion Kit";
         String itemsSelector = ".product-item";
-        public void AddYogaItemToCart(String itemname, String size, String color)
+        #endregion
+        #region spriteYogaMethods
+        public bool AddYogaItemToCart(String itemname, String size, String color)
         {
-            try
+            bool pageLoadStatus = VerifyPageOpen(pageTitle);
+            if (pageLoadStatus)
             {
-                VerifyPageOpen(pageTitle);
-                ItemAnalyzer.AddToCartByHover(itemname, size, color, itemsSelector, true);
+                DeleteAd();
+                try
+                {
+                    return ItemAnalyzer.AddToCartByHover(itemname, size, color, itemsSelector, true);
+                }
+                catch (Exception ex)
+                {
+                    RaiseException(ex);
+                    return false;
+                }
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine("The page doesnt exist");
+                return false;
             }
-            
-        } 
-    
+
+        }
+        #endregion
 
     }
 }

@@ -146,8 +146,6 @@ namespace Luma_Selenium
             {
                 Console.WriteLine("Login Failed!");
             }
-            
-
         }
 
         [TestMethod]
@@ -217,7 +215,6 @@ namespace Luma_Selenium
                 {
                     Console.WriteLine("Failed to Add Item to Cart");
                 }
-
             }
             else
             {
@@ -595,16 +592,34 @@ namespace Luma_Selenium
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "Data.xml", "AddWomenPantCollectionItemAndCheckout_TC17", DataAccessMethod.Sequential)]
         public void AddWomenPantCollectionItemAndCheckout_TC17()
         {
-            Step = Test.CreateNode("Add a Pant Item From Women");
             String email = TestContext.DataRow["email"].ToString();
             String password = TestContext.DataRow["password"].ToString();
+            String fullname = TestContext.DataRow["fullname"].ToString();
             String itemname = TestContext.DataRow["itemname"].ToString();
+            String successDescription = TestContext.DataRow["successDescription"].ToString();
+            String failureDescription = TestContext.DataRow["failureDescription"].ToString();
             String size = TestContext.DataRow["size"].ToString();
             String color = TestContext.DataRow["color"].ToString();
-            loginPage.Login(email, password);
-            womenPage.WomenLumaPantsCollection(itemname, size, color);
-            ItemAnalyzer.CheckoutPageByCartMenu();
-            TakeScreenshot(Status.Pass, "Pant Women Item Added");
+            bool loginStatus = loginPage.Login(email, password, fullname);
+            HandleStatus(loginStatus, "Logged in Successfully", "Log in failed");
+            if (loginStatus)
+            {
+                bool addStatus = womenPage.WomenLumaPantsCollection(itemname, size, color);
+                HandleStatus(addStatus, successDescription, failureDescription);
+                if (addStatus)
+                {
+                    bool itemBoughtStatus = ItemAnalyzer.CheckoutPageByCartMenu();
+                    HandleStatus(itemBoughtStatus, "Item Bought", "Failed to Buy Item");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to Add Item to Cart");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Login Failed!");
+            }
 
         }
 
@@ -614,16 +629,34 @@ namespace Luma_Selenium
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "Data.xml", "AddMenHoodieItemAndCheckout_TC18", DataAccessMethod.Sequential)]
         public void AddMenHoodieItemAndCheckout_TC18()
         {
-            Step = Test.CreateNode("Add a Hoodie Item From Men");
             String email = TestContext.DataRow["email"].ToString();
             String password = TestContext.DataRow["password"].ToString();
+            String fullname = TestContext.DataRow["fullname"].ToString();
             String itemname = TestContext.DataRow["itemname"].ToString();
+            String successDescription = TestContext.DataRow["successDescription"].ToString();
+            String failureDescription = TestContext.DataRow["failureDescription"].ToString();
             String size = TestContext.DataRow["size"].ToString();
             String color = TestContext.DataRow["color"].ToString();
-            loginPage.Login(email, password);
-            menPage.HoodiesAndSweatshirts(itemname, size, color);
-            ItemAnalyzer.CheckoutPageByCartMenu();
-            TakeScreenshot(Status.Pass, "Hoodie Men Item Added");
+            bool loginStatus = loginPage.Login(email, password, fullname);
+            HandleStatus(loginStatus, "Logged in Successfully", "Log in failed");
+            if (loginStatus)
+            {
+                bool addStatus = menPage.HoodiesAndSweatshirts(itemname, size, color);
+                HandleStatus(addStatus, successDescription, failureDescription);
+                if (addStatus)
+                {
+                    bool itemBoughtStatus = ItemAnalyzer.CheckoutPageByCartMenu();
+                    HandleStatus(itemBoughtStatus, "Item Bought", "Failed to Buy Item");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to Add Item to Cart");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Login Failed!");
+            }
         }
 
         [TestMethod]
@@ -632,16 +665,34 @@ namespace Luma_Selenium
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "Data.xml", "AddMenHotSellersItemAndCheckout_TC19", DataAccessMethod.Sequential)]
         public void AddMenHotSellersItemAndCheckout_TC19()
         {
-            Step = Test.CreateNode("Add a Hot Seller Item From Men");
             String email = TestContext.DataRow["email"].ToString();
             String password = TestContext.DataRow["password"].ToString();
+            String fullname = TestContext.DataRow["fullname"].ToString();
             String itemname = TestContext.DataRow["itemname"].ToString();
+            String successDescription = TestContext.DataRow["successDescription"].ToString();
+            String failureDescription = TestContext.DataRow["failureDescription"].ToString();
             String size = TestContext.DataRow["size"].ToString();
             String color = TestContext.DataRow["color"].ToString();
-            loginPage.Login(email, password);
-            menPage.HotSellers(itemname, size, color);
-            ItemAnalyzer.CheckoutPageByCartMenu();
-            TakeScreenshot(Status.Pass, "Hot Seller Men Item Added");
+            bool loginStatus = loginPage.Login(email, password, fullname);
+            HandleStatus(loginStatus, "Logged in Successfully", "Log in failed");
+            if (loginStatus)
+            {
+                bool addStatus = menPage.HotSellers(itemname, size, color);
+                HandleStatus(addStatus, successDescription, failureDescription);
+                if (addStatus)
+                {
+                    bool itemBoughtStatus = ItemAnalyzer.CheckoutPageByCartMenu();
+                    HandleStatus(itemBoughtStatus, "Item Bought", "Failed to Buy Item");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to Add Item to Cart");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Login Failed!");
+            }
         }
 
         [TestMethod]
@@ -650,16 +701,34 @@ namespace Luma_Selenium
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "Data.xml", "AddGearYogaKitItemAndCheckout_TC20", DataAccessMethod.Sequential)]
         public void AddGearYogaKitItemAndCheckout_TC20()
         {
-            Step = Test.CreateNode("Add a Yoga Item From Gear");
             String email = TestContext.DataRow["email"].ToString();
             String password = TestContext.DataRow["password"].ToString();
+            String fullname = TestContext.DataRow["fullname"].ToString();
             String itemname = TestContext.DataRow["itemname"].ToString();
+            String successDescription = TestContext.DataRow["successDescription"].ToString();
+            String failureDescription = TestContext.DataRow["failureDescription"].ToString();
             String size = TestContext.DataRow["size"].ToString();
             String color = TestContext.DataRow["color"].ToString();
-            loginPage.Login(email, password);
-            gearPage.SpriteYogaCompanionKit(itemname, size, color);
-            ItemAnalyzer.CheckoutPageByCartMenu();
-            TakeScreenshot(Status.Pass, "Yoga Gear Item Added");
+            bool loginStatus = loginPage.Login(email, password, fullname);
+            HandleStatus(loginStatus, "Logged in Successfully", "Log in failed");
+            if (loginStatus)
+            {
+                bool addStatus = gearPage.SpriteYogaCompanionKit(itemname, size, color);
+                HandleStatus(addStatus, successDescription, failureDescription);
+                if (addStatus)
+                {
+                    bool itemBoughtStatus = ItemAnalyzer.CheckoutPageByCartMenu();
+                    HandleStatus(itemBoughtStatus, "Item Bought", "Failed to Buy Item");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to Add Item to Cart");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Login Failed!");
+            }
         }
 
         [TestMethod]
@@ -668,16 +737,34 @@ namespace Luma_Selenium
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "Data.xml", "AddGearFitnessItemAndCheckout_TC21", DataAccessMethod.Sequential)]
         public void AddGearFitnessItemAndCheckout_TC21()
         {
-            Step = Test.CreateNode("Add a Fitness Item From Gear");
             String email = TestContext.DataRow["email"].ToString();
             String password = TestContext.DataRow["password"].ToString();
+            String fullname = TestContext.DataRow["fullname"].ToString();
             String itemname = TestContext.DataRow["itemname"].ToString();
+            String successDescription = TestContext.DataRow["successDescription"].ToString();
+            String failureDescription = TestContext.DataRow["failureDescription"].ToString();
             String size = TestContext.DataRow["size"].ToString();
             String color = TestContext.DataRow["color"].ToString();
-            loginPage.Login(email, password);
-            gearPage.FitnessItem(itemname, size, color);
-            ItemAnalyzer.CheckoutPageByCartMenu();
-            TakeScreenshot(Status.Pass, "Fitness Gear Item Added");
+            bool loginStatus = loginPage.Login(email, password, fullname);
+            HandleStatus(loginStatus, "Logged in Successfully", "Log in failed");
+            if (loginStatus)
+            {
+                bool addStatus = gearPage.FitnessItem(itemname, size, color);
+                HandleStatus(addStatus, successDescription, failureDescription);
+                if (addStatus)
+                {
+                    bool itemBoughtStatus = ItemAnalyzer.CheckoutPageByCartMenu();
+                    HandleStatus(itemBoughtStatus, "Item Bought", "Failed to Buy Item");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to Add Item to Cart");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Login Failed!");
+            }
         }
 
         [TestMethod]
@@ -686,17 +773,34 @@ namespace Luma_Selenium
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "Data.xml", "AddGearPromoItemAndCheckout_TC22", DataAccessMethod.Sequential)]
         public void AddGearPromoItemAndCheckout_TC22()
         {
-            Step = Test.CreateNode("Add a Promo Item From Gear");
             String email = TestContext.DataRow["email"].ToString();
             String password = TestContext.DataRow["password"].ToString();
+            String fullname = TestContext.DataRow["fullname"].ToString();
             String itemname = TestContext.DataRow["itemname"].ToString();
+            String successDescription = TestContext.DataRow["successDescription"].ToString();
+            String failureDescription = TestContext.DataRow["failureDescription"].ToString();
             String size = TestContext.DataRow["size"].ToString();
             String color = TestContext.DataRow["color"].ToString();
-            loginPage.Login(email, password);
-            gearPage.PromoItem(itemname, size, color);
-            ItemAnalyzer.CheckoutPageByCartMenu();
-            TakeScreenshot(Status.Pass, "Promo Gear Item Added");
-
+            bool loginStatus = loginPage.Login(email, password, fullname);
+            HandleStatus(loginStatus, "Logged in Successfully", "Log in failed");
+            if (loginStatus)
+            {
+                bool addStatus = gearPage.PromoItem(itemname, size, color);
+                HandleStatus(addStatus, successDescription, failureDescription);
+                if (addStatus)
+                {
+                    bool itemBoughtStatus = ItemAnalyzer.CheckoutPageByCartMenu();
+                    HandleStatus(itemBoughtStatus, "Item Bought", "Failed to Buy Item");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to Add Item to Cart");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Login Failed!");
+            }
         }
 
         [TestMethod]
@@ -705,16 +809,34 @@ namespace Luma_Selenium
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "Data.xml", "AddGearBagItemAndCheckout_TC23", DataAccessMethod.Sequential)]
         public void AddGearBagItemAndCheckout_TC23()
         {
-            Step = Test.CreateNode("Add a Gym Item From Gear");
             String email = TestContext.DataRow["email"].ToString();
             String password = TestContext.DataRow["password"].ToString();
+            String fullname = TestContext.DataRow["fullname"].ToString();
             String itemname = TestContext.DataRow["itemname"].ToString();
+            String successDescription = TestContext.DataRow["successDescription"].ToString();
+            String failureDescription = TestContext.DataRow["failureDescription"].ToString();
             String size = TestContext.DataRow["size"].ToString();
             String color = TestContext.DataRow["color"].ToString();
-            loginPage.Login(email, password);
-            gearPage.BagItem(itemname, size, color);
-            ItemAnalyzer.CheckoutPageByCartMenu();
-            TakeScreenshot(Status.Pass, "Bag Gear Item Added");
+            bool loginStatus = loginPage.Login(email, password, fullname);
+            HandleStatus(loginStatus, "Logged in Successfully", "Log in failed");
+            if (loginStatus)
+            {
+                bool addStatus = gearPage.BagItem(itemname, size, color);
+                HandleStatus(addStatus, successDescription, failureDescription);
+                if (addStatus)
+                {
+                    bool itemBoughtStatus = ItemAnalyzer.CheckoutPageByCartMenu();
+                    HandleStatus(itemBoughtStatus, "Item Bought", "Failed to Buy Item");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to Add Item to Cart");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Login Failed!");
+            }
 
         }
 
@@ -724,16 +846,34 @@ namespace Luma_Selenium
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "Data.xml", "AddGearGymItemAndCheckout_TC24", DataAccessMethod.Sequential)]
         public void AddGearGymItemAndCheckout_TC24()
         {
-            Step = Test.CreateNode("Add a Gym Item From Gear");
             String email = TestContext.DataRow["email"].ToString();
             String password = TestContext.DataRow["password"].ToString();
+            String fullname = TestContext.DataRow["fullname"].ToString();
             String itemname = TestContext.DataRow["itemname"].ToString();
+            String successDescription = TestContext.DataRow["successDescription"].ToString();
+            String failureDescription = TestContext.DataRow["failureDescription"].ToString();
             String size = TestContext.DataRow["size"].ToString();
             String color = TestContext.DataRow["color"].ToString();
-            loginPage.Login(email, password);
-            gearPage.GymItem(itemname, size, color);
-            ItemAnalyzer.CheckoutPageByCartMenu();
-            TakeScreenshot(Status.Pass, "Gym Gear Item Added");
+            bool loginStatus = loginPage.Login(email, password, fullname);
+            HandleStatus(loginStatus, "Logged in Successfully", "Log in failed");
+            if (loginStatus)
+            {
+                bool addStatus = gearPage.GymItem(itemname, size, color);
+                HandleStatus(addStatus, successDescription, failureDescription);
+                if (addStatus)
+                {
+                    bool itemBoughtStatus = ItemAnalyzer.CheckoutPageByCartMenu();
+                    HandleStatus(itemBoughtStatus, "Item Bought", "Failed to Buy Item");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to Add Item to Cart");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Login Failed!");
+            }
 
         }
 
@@ -743,16 +883,34 @@ namespace Luma_Selenium
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "Data.xml", "AddGearWatchItemAndCheckout_TC25", DataAccessMethod.Sequential)]
         public void AddGearWatchItemAndCheckout_TC25()
         {
-            Step = Test.CreateNode("Add a watch Item From Gear");
             String email = TestContext.DataRow["email"].ToString();
             String password = TestContext.DataRow["password"].ToString();
+            String fullname = TestContext.DataRow["fullname"].ToString();
             String itemname = TestContext.DataRow["itemname"].ToString();
+            String successDescription = TestContext.DataRow["successDescription"].ToString();
+            String failureDescription = TestContext.DataRow["failureDescription"].ToString();
             String size = TestContext.DataRow["size"].ToString();
             String color = TestContext.DataRow["color"].ToString();
-            loginPage.Login(email, password);
-            gearPage.WatchItem(itemname, size, color);
-            ItemAnalyzer.CheckoutPageByCartMenu();
-            TakeScreenshot(Status.Pass, "Watch Gear Item Added");
+            bool loginStatus = loginPage.Login(email, password, fullname);
+            HandleStatus(loginStatus, "Logged in Successfully", "Log in failed");
+            if (loginStatus)
+            {
+                bool addStatus = gearPage.WatchItem(itemname, size, color);
+                HandleStatus(addStatus, successDescription, failureDescription);
+                if (addStatus)
+                {
+                    bool itemBoughtStatus = ItemAnalyzer.CheckoutPageByCartMenu();
+                    HandleStatus(itemBoughtStatus, "Item Bought", "Failed to Buy Item");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to Add Item to Cart");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Login Failed!");
+            }
 
         }
 
@@ -762,17 +920,34 @@ namespace Luma_Selenium
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "Data.xml", "AddGearHotSellerItemAndCheckout_TC26", DataAccessMethod.Sequential)]
         public void AddGearHotSellerItemAndCheckout_TC26()
         {
-            Step = Test.CreateNode("Add a Hot seller Item From Gear");
             String email = TestContext.DataRow["email"].ToString();
             String password = TestContext.DataRow["password"].ToString();
+            String fullname = TestContext.DataRow["fullname"].ToString();
             String itemname = TestContext.DataRow["itemname"].ToString();
+            String successDescription = TestContext.DataRow["successDescription"].ToString();
+            String failureDescription = TestContext.DataRow["failureDescription"].ToString();
             String size = TestContext.DataRow["size"].ToString();
             String color = TestContext.DataRow["color"].ToString();
-            loginPage.Login(email, password);
-            gearPage.HotSellers(itemname, size, color);
-            ItemAnalyzer.CheckoutPageByCartMenu();
-            TakeScreenshot(Status.Pass, "Hot Seller Gear Item Added");
-
+            bool loginStatus = loginPage.Login(email, password, fullname);
+            HandleStatus(loginStatus, "Logged in Successfully", "Log in failed");
+            if (loginStatus)
+            {
+                bool addStatus = gearPage.HotSellers(itemname, size, color);
+                HandleStatus(addStatus, successDescription, failureDescription);
+                if (addStatus)
+                {
+                    bool itemBoughtStatus = ItemAnalyzer.CheckoutPageByCartMenu();
+                    HandleStatus(itemBoughtStatus, "Item Bought", "Failed to Buy Item");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to Add Item to Cart");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Login Failed!");
+            }
         }
 
         [TestMethod]
@@ -781,16 +956,34 @@ namespace Luma_Selenium
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "Data.xml", "AddTrainingErinRecommendedItemAndCheckout_TC27", DataAccessMethod.Sequential)]
         public void AddTrainingErinRecommendedItemAndCheckout_TC27()
         {
-            Step = Test.CreateNode("Add a Training Erin Recommended Item From Training");
             String email = TestContext.DataRow["email"].ToString();
             String password = TestContext.DataRow["password"].ToString();
+            String fullname = TestContext.DataRow["fullname"].ToString();
             String itemname = TestContext.DataRow["itemname"].ToString();
+            String successDescription = TestContext.DataRow["successDescription"].ToString();
+            String failureDescription = TestContext.DataRow["failureDescription"].ToString();
             String size = TestContext.DataRow["size"].ToString();
             String color = TestContext.DataRow["color"].ToString();
-            loginPage.Login(email, password);
-            trainingPage.ErinRecommendCollection(itemname, size, color);
-            ItemAnalyzer.CheckoutPageByCartMenu();
-            TakeScreenshot(Status.Pass, "Training Erin Recommendation Item Added");
+            bool loginStatus = loginPage.Login(email, password, fullname);
+            HandleStatus(loginStatus, "Logged in Successfully", "Log in failed");
+            if (loginStatus)
+            {
+                bool addStatus = trainingPage.ErinRecommendCollection(itemname, size, color);
+                HandleStatus(addStatus, successDescription, failureDescription);
+                if (addStatus)
+                {
+                    bool itemBoughtStatus = ItemAnalyzer.CheckoutPageByCartMenu();
+                    HandleStatus(itemBoughtStatus, "Item Bought", "Failed to Buy Item");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to Add Item to Cart");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Login Failed!");
+            }
 
         }
 
@@ -800,16 +993,35 @@ namespace Luma_Selenium
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "Data.xml", "AddTrainingVideoAndCheckout_TC28", DataAccessMethod.Sequential)]
         public void AddTrainingVideoAndCheckout_TC28()
         {
-            Step = Test.CreateNode("Add a Training Video Item From Training");
             String email = TestContext.DataRow["email"].ToString();
             String password = TestContext.DataRow["password"].ToString();
+            String fullname = TestContext.DataRow["fullname"].ToString();
             String itemname = TestContext.DataRow["itemname"].ToString();
+            String successDescription = TestContext.DataRow["successDescription"].ToString();
+            String failureDescription = TestContext.DataRow["failureDescription"].ToString();
             String size = TestContext.DataRow["size"].ToString();
             String color = TestContext.DataRow["color"].ToString();
-            loginPage.Login(email, password);
-            trainingPage.TrainingOnDemand(itemname, size, color);
-            ItemAnalyzer.CheckoutPageByCartMenu();
-            TakeScreenshot(Status.Pass, "Training Video Item Added");
+            bool loginStatus = loginPage.Login(email, password, fullname);
+            HandleStatus(loginStatus, "Logged in Successfully", "Log in failed");
+            if (loginStatus)
+            {
+                bool addStatus = trainingPage.TrainingOnDemand(itemname, size, color);
+                HandleStatus(addStatus, successDescription, failureDescription);
+                if (addStatus)
+                {
+                    bool itemBoughtStatus = ItemAnalyzer.CheckoutPageByCartMenu();
+                    HandleStatus(itemBoughtStatus, "Item Bought", "Failed to Buy Item");
+                }
+                else
+                {
+                    Console.WriteLine("There are no videos");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Login Failed!");
+            }
+           
 
         }
 
@@ -819,16 +1031,34 @@ namespace Luma_Selenium
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "Data.xml", "AddWomenShortsItemAndCheckout_TC29", DataAccessMethod.Sequential)]
         public void AddWomenShortsItemAndCheckout_TC29()
         {
-            Step = Test.CreateNode("Add a Women Shorts Item From Women");
             String email = TestContext.DataRow["email"].ToString();
             String password = TestContext.DataRow["password"].ToString();
+            String fullname = TestContext.DataRow["fullname"].ToString();
             String itemname = TestContext.DataRow["itemname"].ToString();
+            String successDescription = TestContext.DataRow["successDescription"].ToString();
+            String failureDescription = TestContext.DataRow["failureDescription"].ToString();
             String size = TestContext.DataRow["size"].ToString();
             String color = TestContext.DataRow["color"].ToString();
-            loginPage.Login(email, password);
-            womenPage.WomenShortsCollection(itemname, size, color);
-            ItemAnalyzer.CheckoutPageByCartMenu();
-            TakeScreenshot(Status.Pass, "Women Shorts Item Added");
+            bool loginStatus = loginPage.Login(email, password, fullname);
+            HandleStatus(loginStatus, "Logged in Successfully", "Log in failed");
+            if (loginStatus)
+            {
+                bool addStatus = womenPage.WomenShortsCollection(itemname, size, color);
+                HandleStatus(addStatus, successDescription, failureDescription);
+                if (addStatus)
+                {
+                    bool itemBoughtStatus = ItemAnalyzer.CheckoutPageByCartMenu();
+                    HandleStatus(itemBoughtStatus, "Item Bought", "Failed to Buy Item");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to Add Item to Cart");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Login Failed!");
+            }
 
         }
 
@@ -838,16 +1068,34 @@ namespace Luma_Selenium
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "Data.xml", "AddWomenBrasTanksItemAndCheckout_TC30", DataAccessMethod.Sequential)]
         public void AddWomenBrasTanksItemAndCheckout_TC30()
         {
-            Step = Test.CreateNode("Add a Women Bra/Tank Item From Women");
             String email = TestContext.DataRow["email"].ToString();
             String password = TestContext.DataRow["password"].ToString();
+            String fullname = TestContext.DataRow["fullname"].ToString();
             String itemname = TestContext.DataRow["itemname"].ToString();
+            String successDescription = TestContext.DataRow["successDescription"].ToString();
+            String failureDescription = TestContext.DataRow["failureDescription"].ToString();
             String size = TestContext.DataRow["size"].ToString();
             String color = TestContext.DataRow["color"].ToString();
-            loginPage.Login(email, password);
-            womenPage.WomenBrasTanksCollection(itemname, size, color);
-            ItemAnalyzer.CheckoutPageByCartMenu();
-            TakeScreenshot(Status.Pass, "Women Bras/Tanks Item Added");
+            bool loginStatus = loginPage.Login(email, password, fullname);
+            HandleStatus(loginStatus, "Logged in Successfully", "Log in failed");
+            if (loginStatus)
+            {
+                bool addStatus = womenPage.WomenBrasTanksCollection(itemname, size, color);
+                HandleStatus(addStatus, successDescription, failureDescription);
+                if (addStatus)
+                {
+                    bool itemBoughtStatus = ItemAnalyzer.CheckoutPageByCartMenu();
+                    HandleStatus(itemBoughtStatus, "Item Bought", "Failed to Buy Item");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to Add Item to Cart");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Login Failed!");
+            }
 
         }
 
@@ -857,16 +1105,34 @@ namespace Luma_Selenium
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "Data.xml", "AddSalesWomenItemAndCheckout_TC31", DataAccessMethod.Sequential)]
         public void AddSalesWomenItemAndCheckout_TC31()
         {
-            Step = Test.CreateNode("Add a Women SAles Item From Sales");
             String email = TestContext.DataRow["email"].ToString();
             String password = TestContext.DataRow["password"].ToString();
+            String fullname = TestContext.DataRow["fullname"].ToString();
             String itemname = TestContext.DataRow["itemname"].ToString();
+            String successDescription = TestContext.DataRow["successDescription"].ToString();
+            String failureDescription = TestContext.DataRow["failureDescription"].ToString();
             String size = TestContext.DataRow["size"].ToString();
             String color = TestContext.DataRow["color"].ToString();
-            loginPage.Login(email, password);
-            salesPage.WomenSales(itemname, size, color);
-            ItemAnalyzer.CheckoutPageByCartMenu();
-            TakeScreenshot(Status.Pass, "Sales Women Item Added");
+            bool loginStatus = loginPage.Login(email, password, fullname);
+            HandleStatus(loginStatus, "Logged in Successfully", "Log in failed");
+            if (loginStatus)
+            {
+                bool addStatus = salesPage.WomenSales(itemname, size, color);
+                HandleStatus(addStatus, successDescription, failureDescription);
+                if (addStatus)
+                {
+                    bool itemBoughtStatus = ItemAnalyzer.CheckoutPageByCartMenu();
+                    HandleStatus(itemBoughtStatus, "Item Bought", "Failed to Buy Item");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to Add Item to Cart");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Login Failed!");
+            }
 
         }
 
@@ -876,17 +1142,34 @@ namespace Luma_Selenium
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "Data.xml", "AddSalesMenItemAndCheckout_TC32", DataAccessMethod.Sequential)]
         public void AddSalesMenItemAndCheckout_TC32()
         {
-            Step = Test.CreateNode("Add a Men Item From Sales");
             String email = TestContext.DataRow["email"].ToString();
             String password = TestContext.DataRow["password"].ToString();
+            String fullname = TestContext.DataRow["fullname"].ToString();
             String itemname = TestContext.DataRow["itemname"].ToString();
+            String successDescription = TestContext.DataRow["successDescription"].ToString();
+            String failureDescription = TestContext.DataRow["failureDescription"].ToString();
             String size = TestContext.DataRow["size"].ToString();
             String color = TestContext.DataRow["color"].ToString();
-            loginPage.Login(email, password);
-            salesPage.MenSales(itemname, size, color);
-            ItemAnalyzer.CheckoutPageByCartMenu();
-            TakeScreenshot(Status.Pass, "Sales Men Item Added");
-
+            bool loginStatus = loginPage.Login(email, password, fullname);
+            HandleStatus(loginStatus, "Logged in Successfully", "Log in failed");
+            if (loginStatus)
+            {
+                bool addStatus = salesPage.MenSales(itemname, size, color);
+                HandleStatus(addStatus, successDescription, failureDescription);
+                if (addStatus)
+                {
+                    bool itemBoughtStatus = ItemAnalyzer.CheckoutPageByCartMenu();
+                    HandleStatus(itemBoughtStatus, "Item Bought", "Failed to Buy Item");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to Add Item to Cart");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Login Failed!");
+            }
         }
 
         [TestMethod]
@@ -895,16 +1178,34 @@ namespace Luma_Selenium
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "Data.xml", "AddSalesStealsItemAndCheckout_TC33", DataAccessMethod.Sequential)]
         public void AddSalesStealsItemAndCheckout_TC33()
         {
-            Step = Test.CreateNode("Add a Sales Steal Item From Sales");
             String email = TestContext.DataRow["email"].ToString();
             String password = TestContext.DataRow["password"].ToString();
+            String fullname = TestContext.DataRow["fullname"].ToString();
             String itemname = TestContext.DataRow["itemname"].ToString();
+            String successDescription = TestContext.DataRow["successDescription"].ToString();
+            String failureDescription = TestContext.DataRow["failureDescription"].ToString();
             String size = TestContext.DataRow["size"].ToString();
             String color = TestContext.DataRow["color"].ToString();
-            loginPage.Login(email, password);
-            salesPage.GearSteals(itemname, size, color);
-            ItemAnalyzer.CheckoutPageByCartMenu();
-            TakeScreenshot(Status.Pass, "Sales Steals Item Added");
+            bool loginStatus = loginPage.Login(email, password, fullname);
+            HandleStatus(loginStatus, "Logged in Successfully", "Log in failed");
+            if (loginStatus)
+            {
+                bool addStatus = salesPage.GearSteals(itemname, size, color);
+                HandleStatus(addStatus, successDescription, failureDescription);
+                if (addStatus)
+                {
+                    bool itemBoughtStatus = ItemAnalyzer.CheckoutPageByCartMenu();
+                    HandleStatus(itemBoughtStatus, "Item Bought", "Failed to Buy Item");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to Add Item to Cart");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Login Failed!");
+            }
 
         }
 

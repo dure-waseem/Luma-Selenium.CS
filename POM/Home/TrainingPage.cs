@@ -10,26 +10,63 @@ namespace Luma_Selenium
     public class TrainingPage : Navigator
     {
         #region TrainingLocators
-        By navLocator = By.Id("ui-id-7");
-        String pageTitle = "Training";
-
+        private By navLocator = By.Id("ui-id-7");
+        private String pageTitle = "Training";
+        private By erinRecommendedLocator = By.CssSelector(".block-promo.training-erin");
+        private By trainingVideoLocator = By.CssSelector(".block-promo.training-on-demand");
         #endregion
 
         #region TrainingMethods
-        public void ErinRecommendCollection(String itemname, String size, String color)
+        public bool ErinRecommendCollection(String itemname, String size, String color)
         {
-            InitializePage(navLocator, pageTitle);
-            driver.FindElement(By.CssSelector(".block-promo.training-erin")).Click();
-            ErinRecommendationPage erinRecommendationPage = new ErinRecommendationPage();
-            erinRecommendationPage.AddErinItemToCart(itemname, size, color);
+            Step = Test.CreateNode("Erin Recommended Collection");
+            bool pageLoadStatus = InitializePage(navLocator, pageTitle);
+            if (pageLoadStatus)
+            {
+                DeleteAd();
+                try
+                {
+                    IWebElement erinCollectionLink = WaitForElement(driver, erinRecommendedLocator);
+                    Click(erinCollectionLink, "Open Erin Recommended Collections");
+                    ErinRecommendationPage erinRecommendationPage = new ErinRecommendationPage();
+                    return erinRecommendationPage.AddErinItemToCart(itemname, size, color);
+                }
+                catch (Exception ex)
+                {
+                    RaiseException(ex);
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public void TrainingOnDemand(String itemname, String size, String color)
+        public bool TrainingOnDemand(String itemname, String size, String color)
         {
-            InitializePage(navLocator, pageTitle);
-            driver.FindElement(By.CssSelector(".block-promo.training-on-demand")).Click();
-            TrainingVideoPage trainingVideoPage = new TrainingVideoPage();
-            trainingVideoPage.ViewTrainingVideo(itemname, size, color);
+            Step = Test.CreateNode("Training Video");
+            bool pageLoadStatus = InitializePage(navLocator, pageTitle);
+            if (pageLoadStatus)
+            {
+                DeleteAd();
+                try
+                {
+                    IWebElement videoCollectionLink = WaitForElement(driver, trainingVideoLocator);
+                    Click(videoCollectionLink, "Open Video Collections");
+                    TrainingVideoPage trainingVideoPage = new TrainingVideoPage();
+                    return trainingVideoPage.ViewTrainingVideo(itemname, size, color);
+                }
+                catch (Exception ex)
+                {
+                    RaiseException(ex);
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
         #endregion
 

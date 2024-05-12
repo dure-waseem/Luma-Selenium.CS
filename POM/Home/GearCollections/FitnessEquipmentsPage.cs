@@ -8,14 +8,33 @@ namespace Luma_Selenium
 {
     public class FitnessEquipmentsPage : Navigator
     {
+        #region fitnessEquipLocators
         String pageTitle = "Fitness Equipment";
         String itemsSelector = ".product-item";
-        public void AddFitnessItemToCart(String itemname, String size, String color)
+        #endregion
+        #region fitnessEquipMethods
+        public bool AddFitnessItemToCart(String itemname, String size, String color)
         {
-            VerifyPageOpen(pageTitle);
-            ItemAnalyzer.AddToCartByHover(itemname, size, color, itemsSelector, false);
-        } 
-    
+            bool pageLoadStatus = VerifyPageOpen(pageTitle);
+            if (pageLoadStatus)
+            {
+                DeleteAd();
+                try
+                {
+                    return ItemAnalyzer.AddToCartByHover(itemname, size, color, itemsSelector, false);
+                }
+                catch (Exception ex)
+                {
+                    RaiseException(ex);
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        #endregion
 
     }
 }
