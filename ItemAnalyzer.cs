@@ -27,6 +27,24 @@ namespace Luma_Selenium
         private static By checkoutButtonLocator = By.CssSelector(".action.primary.checkout");
         private static By nextButtonLocator = By.CssSelector(".button.action.continue.primary");
         private static By pageTitleLocator = By.ClassName("page-title");
+        private static By cartItemsLocator = By.ClassName("minicart-items");
+        private static String cartMenuItemSelector = ".item.product.product-item";
+        private static String cartMenuNameSelector = ".product-item-name";
+        private static By priceLocator = By.ClassName("price-wrapper");
+        private static By quantityBoxLocator = By.ClassName("details-qty");
+        private static By quantityInputLocator = By.TagName("input");
+        private static String inputBoxDataSelector = "data-item-qty";
+        private static By pricePerItemBoxLocator = By.ClassName("product-item-pricing");
+        private static By pricerPerItemValueLocator = By.ClassName("price-container");
+        private static String clearScript = "arguments[0].value = '';";
+        private static By updateButtonLocator = By.ClassName("update-cart-item");
+        private static String quantitySelector = "data-item-qty";
+        private static By deleteButtonLocator = By.CssSelector(".action.delete");
+        private static By popupOkayLocator = By.CssSelector(".action-primary.action-accept");
+        private static By editQuantityInputLocator = By.CssSelector(".input-text.qty");
+        private static By editButtonLocator = By.CssSelector(".action.edit");
+        private static By addToCartButtonLocator = By.CssSelector(".action.primary.tocart");
+        private static By notificationLocator = By.ClassName("messages");
         #endregion
         #region ItemAnalyzerMethods
         private static IWebElement FindElementByName(String itemsSelector, String nameSelector, String productName)
@@ -55,6 +73,36 @@ namespace Luma_Selenium
                     RaiseException(e);
                 }
                 
+            }
+            return target;
+        }
+        private static IWebElement FindElementByParentName(IWebElement parent, String itemsSelector, String nameSelector, String productName)
+        {
+            IList<IWebElement> items = WaitForParentElements(parent, By.CssSelector(itemsSelector));
+            IWebElement target = null;
+            foreach (IWebElement parentElement in items)
+            {
+                try
+                {
+                    if (parentElement != null)
+                    {
+                        IWebElement element = WaitForParentElement(parentElement, By.CssSelector(nameSelector));
+                        string itemText = element.Text;
+                        if (itemText == productName)
+                        {
+                            target = parentElement;
+                        }
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                catch (Exception e)
+                {
+                    RaiseException(e);
+                }
+
             }
             return target;
         }
@@ -148,91 +196,134 @@ namespace Luma_Selenium
             IWebElement cartIcon = WaitForElement(driver, cartIconLocator);
             Click(cartIcon, "Opened Cart");
         }
-        private static void ManageCartUpdateCost(IWebElement target, string newQuantity)
+        private static bool ManageCartUpdateCost(IWebElement target, string newQuantity)
         {
-            String initialPrice = driver.FindElement(By.ClassName("price-wrapper")).Text;
-            float initialPriceAsFloat = ConvertStringToFloat(initialPrice);
-            IWebElement quantityBox = target.FindElement(By.CssSelector(".details-qty.qty"));
-            IWebElement inputBox = quantityBox.FindElement(By.TagName("input"));
-            String initialQuantity = inputBox.GetAttribute("data-item-qty");
-            IWebElement pricePerItemBox = target.FindElement(By.ClassName("product-item-pricing"));
-            String pricePerItemString = pricePerItemBox.FindElement(By.ClassName("price-container")).Text;
-            float pricePerItem = ConvertStringToFloat(pricePerItemString);
-            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-            js.ExecuteScript("arguments[0].value = '';", inputBox);
-            inputBox.SendKeys(newQuantity);
-            quantityBox.FindElement(By.ClassName("update-cart-item")).Click();
-            Thread.Sleep(5000);
-            String finalPrice = driver.FindElement(By.ClassName("price-wrapper")).Text;
-            float finalPriceAsFloat = ConvertStringToFloat(finalPrice);
-            float difference = ConvertStringToFloat(newQuantity) - ConvertStringToFloat(initialQuantity);
-            float finalDifference = pricePerItem * difference;
-            float targetPrice = finalDifference + initialPriceAsFloat;
-            Assert.AreEqual(finalPriceAsFloat, targetPrice, "Invalid Additions");
+            try
+            {
+                IWebElement initialPriceBox = WaitForElement(driver, priceLocator);
+                String initialPrice = initialPriceBox.Text;
+                float initialPriceAsFloat = ConvertStringToFloat(initialPrice);
+                Thread.Sleep(2000);
+                IWebElement quantityBox = WaitForParentElement(target, quantityBoxLocator);
+                IWebElement inputBox = WaitForParentElement(quantityBox, quantityInputLocator);
+                String initialQuantity = inputBox.GetAttribute(inputBoxDataSelector);
+                Console.WriteLine(initialQuantity);
+                IWebElement pricePerItemBox = WaitForParentElement(target, pricePerItemBoxLocator);
+                IWebElement pricePerItemValueBox = WaitForParentElement(pricePerItemBox, pricerPerItemValueLocator);
+                String pricePerItemString = pricePerItemValueBox.Text;
+                float pricePerItem = ConvertStringToFloat(pricePerItemString);
+                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                js.ExecuteScript(clearScript, inputBox);
+                Write(inputBox, newQuantity, "Update Item Quantity");
+                IWebElement updateButton = WaitForParentElement(quantityBox, updateButtonLocator);
+                Click(updateButton, "Update Quantity");
+                Thread.Sleep(5000);
+                IWebElement finalPriceBox = WaitForElement(driver, priceLocator);
+                String finalPrice = finalPriceBox.Text;
+                float finalPriceAsFloat = ConvertStringToFloat(finalPrice);
+                float difference = ConvertStringToFloat(newQuantity) - ConvertStringToFloat(initialQuantity);
+                float finalDifference = pricePerItem * difference;
+                float targetPrice = finalDifference + initialPriceAsFloat;
+                Assert.AreEqual(finalPriceAsFloat, targetPrice, "Invalid Additions");
+                return true;
+            }catch(Exception ex)
+            {
+                RaiseException(ex);
+                return false;
+            }
+            
         }
-        public static void UpdateQuantityInCartMenu(String productName, string newQuantity)
+        public static bool UpdateQuantityInCartMenu(String productName, string newQuantity)
         {
             Thread.Sleep(2000);
+            Step = Test.CreateNode("Update Item Quantity In Cart");
             OpenCartMenu();
-            IWebElement target = FindElementByName(".item.product.product-item", ".product-item-name", productName);
-
+            Thread.Sleep(2000);
+            IWebElement cart = WaitForElement(driver, cartItemsLocator);
+            IWebElement target = FindElementByParentName(cart, cartMenuItemSelector, cartMenuNameSelector, productName);
             if (target != null)
             {
-                ManageCartUpdateCost(target, newQuantity);
+                Thread.Sleep(5000);
+                return ManageCartUpdateCost(target, newQuantity);
+            }
+            else
+            {
+                return false;
             }
 
         }
-        public static void DeleteItemFromCartMenu(String productName)
+        public static bool DeleteItemFromCartMenu(String productName)
         {
+            Step = Test.CreateNode("Delete Cart Item");
             Thread.Sleep(2000);
             OpenCartMenu();
-            IWebElement target = FindElementByName(".item.product.product-item", ".product-item-name", productName);
+            Thread.Sleep(2000);
+            IWebElement cart = WaitForElement(driver, cartItemsLocator);
+            IWebElement target = FindElementByParentName(cart, cartMenuItemSelector, cartMenuNameSelector, productName);
 
             if (target != null)
             {
-                String initialPrice = driver.FindElement(By.ClassName("price-wrapper")).Text;
+                IWebElement initialPriceBox = WaitForElement(driver, priceLocator);
+                String initialPrice = initialPriceBox.Text;
                 float initialPriceAsFloat = ConvertStringToFloat(initialPrice);
-                IWebElement quantityBox = target.FindElement(By.CssSelector(".details-qty.qty"));
-                IWebElement inputBox = quantityBox.FindElement(By.TagName("input"));
-                String quantity = inputBox.GetAttribute("data-item-qty");
-                IWebElement pricePerItemBox = target.FindElement(By.ClassName("product-item-pricing"));
-                String pricePerItemString = pricePerItemBox.FindElement(By.ClassName("price-container")).Text;
+                Thread.Sleep(2000);
+                IWebElement quantityBox = WaitForParentElement(target, quantityBoxLocator);
+                IWebElement inputBox = WaitForParentElement(quantityBox, quantityInputLocator);
+                String initialQuantity = inputBox.GetAttribute(inputBoxDataSelector);
+                Console.WriteLine(initialQuantity);
+                IWebElement pricePerItemBox = WaitForParentElement(target, pricePerItemBoxLocator);
+                IWebElement pricePerItemValueBox = WaitForParentElement(pricePerItemBox, pricerPerItemValueLocator);
+                String pricePerItemString = pricePerItemValueBox.Text;
                 float pricePerItem = ConvertStringToFloat(pricePerItemString);
-                IWebElement deleteButton = target.FindElement(By.CssSelector(".action.delete"));
-                deleteButton.Click();
-                IWebElement okayButton = driver.FindElement(By.CssSelector(".action-primary.action-accept"));
-                okayButton.Click();
-                Thread.Sleep(10000);
+                String quantity = inputBox.GetAttribute(quantitySelector);
+                IWebElement deleteButton = WaitForParentElement(target, deleteButtonLocator);
+                Click(deleteButton, "Delete the Item");
+                IWebElement okayButton = WaitForElement(driver, popupOkayLocator);
+                Click(okayButton, "Confirm Deletion");
+                Thread.Sleep(5000);
                 float difference = pricePerItem * ConvertStringToFloat(quantity);
-                String finalPrice = driver.FindElement(By.ClassName("price-wrapper")).Text;
+                IWebElement finalPriceBox = WaitForElement(driver, priceLocator);
+                String finalPrice = finalPriceBox.Text;
                 float finalPriceAsFloat = ConvertStringToFloat(finalPrice);
                 float expectedPrice = initialPriceAsFloat - difference;
                 Assert.AreEqual(finalPriceAsFloat, expectedPrice, "Wrong Cart Cost After Deletion");
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
-        public static void UpdateItemInCartByEditMenu(String productName, String newQuantity,String itemSize, String itemColor, bool swatchOptions)
+        public static bool UpdateItemInCartByEditMenu(String productName, String newQuantity,String itemSize, String itemColor, bool swatchOptions)
         {
+            Step = Test.CreateNode("Update Cart Item");
             Thread.Sleep(2000);
             OpenCartMenu();
-            IWebElement target = FindElementByName(".item.product.product-item", ".product-item-name", productName);
+            IWebElement cart = WaitForElement(driver, cartItemsLocator);
+            IWebElement target = FindElementByParentName(cart, cartMenuItemSelector, cartMenuNameSelector, productName);
             if(target != null)
             {
-                IWebElement editButton = target.FindElement(By.CssSelector(".action.edit"));
-                editButton.Click();
+                IWebElement editButton = WaitForParentElement(target, editButtonLocator);
+                Click(editButton, "Click Edit Button");
                 if (swatchOptions)
                 {
 
                 }
-                IWebElement quantityBox = driver.FindElement(By.CssSelector(".input-text.qty"));
+                IWebElement quantityBox = WaitForElement(driver, editQuantityInputLocator);
                 IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-                js.ExecuteScript("arguments[0].value = '';", quantityBox);
-                quantityBox.SendKeys(newQuantity);
-                IWebElement addToCartButton = driver.FindElement(By.CssSelector(".action.primary.tocart"));
-                addToCartButton.Click();
-                IWebElement notification = driver.FindElement(By.ClassName("messages"));
+                js.ExecuteScript(clearScript, quantityBox);
+                Write(quantityBox, newQuantity, "Enter Quantity");
+                IWebElement addToCartButton = WaitForElement(driver, addToCartButtonLocator);
+                Click(addToCartButton, "Add to Cart");
+                IWebElement notification = WaitForElement(driver, notificationLocator);
                 String notificationText = notification.Text;
                 String expectedText = productName + " was updated in your shopping cart.";
                 Assert.AreEqual(notificationText, expectedText, "Could not update item");
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
         public static bool CheckoutPageByCartMenu()

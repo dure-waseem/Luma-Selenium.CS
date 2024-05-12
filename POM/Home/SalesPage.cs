@@ -14,6 +14,7 @@ namespace Luma_Selenium
         private By womenSalesLocator = By.CssSelector(".block-promo.sale-main");
         private By menSalesLocator = By.CssSelector(".block-promo.sale-mens");
         private By gearStealsLocator = By.CssSelector(".block-promo.sale-women");
+        private By womenTeeLocator = By.CssSelector(".block-promo.sale-womens-t-shirts");
 
         #endregion
 
@@ -95,12 +96,31 @@ namespace Luma_Selenium
                 return false;
             }
         }
-        public void WomenTees(String itemname, String size, String color)
+        public bool WomenTees(String itemname, String size, String color)
         {
-            InitializePage(navLocator, pageTitle);
-            driver.FindElement(By.CssSelector(".block-promo.sale-womens-t-shirts")).Click();
-            WomenTeesCollectionsPage womenTeesCollectionsPage = new WomenTeesCollectionsPage();
-            womenTeesCollectionsPage.AddTeeItemToCart(itemname, size, color);
+            Step = Test.CreateNode("Gear Steals Item");
+            bool pageLoadStatus = InitializePage(navLocator, pageTitle);
+            if (pageLoadStatus)
+            {
+                DeleteAd();
+                try
+                {
+                    IWebElement teeCollectionLink = WaitForElement(driver, womenTeeLocator);
+                    Click(teeCollectionLink, "Open Women Tee Collections");
+                    WomenTeesCollectionsPage womenTeesCollectionsPage = new WomenTeesCollectionsPage();
+                    return womenTeesCollectionsPage.AddTeeItemToCart(itemname, size, color);
+                }
+                catch (Exception ex)
+                {
+                    RaiseException(ex);
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+            
         }
         
         #endregion
