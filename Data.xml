@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Automation>
+	<Execution>
+		<RegistrationFunctionalitySuccess_TC01>
+			<firstname>Dure</firstname>
+			<lastname>Sameen</lastname>
+			<email>duresameen10360208103klolflol662@gmail.com</email>
+			<password>D!reW@haj</password>
+			<successDescription>The Account is Successfully created</successDescription>
+			<failureDescription>The Account Creation Failed</failureDescription>
+		</RegistrationFunctionalitySuccess_TC01>
+		<RegistrationFunctionalitySuccess_TC01>
+			<firstname>Dure</firstname>
+			<lastname>Sameen</lastname>
+			<email>duresameen1036020810366@gmail.com</email>
+			<password>D!reW@haj</password>
+			<successDescription>The Account is Successfully created</successDescription>
+			<failureDescription>The Account Creation Failed</failureDescription>
+		</RegistrationFunctionalitySuccess_TC01>
+		
+		<LoginFunctionalitySuccess_TC02>
+			<fullname>wahaj dure</fullname>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<successDescription>The Account is Successfully Logged In</successDescription>
+			<failureDescription>The Account Login Was Unsuccessful</failureDescription>
+		</LoginFunctionalitySuccess_TC02>
+		<LoginFunctionalitySuccess_TC02>
+			<fullname>wahaj dure</fullname>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!fre</password>
+			<successDescription>The Account is Successfully Logged In</successDescription>
+			<failureDescription>The Account Login Was Unsuccessful</failureDescription>
+		</LoginFunctionalitySuccess_TC02>
+
+		<ForgetPasswordFunctionality_TC03>
+			<email>wahajdure@gmail.com</email>
+			<successDescription>Forget Password is Working Successfully</successDescription>
+			<failureDescription>Forget Password was unsuccessful</failureDescription>
+		</ForgetPasswordFunctionality_TC03>
+
+		<AddYogaItemAndCheckout_TC04>
+			<fullname>wahaj dure</fullname>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<fullname>wahaj dure</fullname>
+			<itemname>Echo Fit Compression Short</itemname>
+			<size>28</size>
+			<color>Blue</color>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddYogaItemAndCheckout_TC04>
+
+		<AddPerformaceSportswearItemAndCheckout_TC05>
+			<fullname>wahaj dure</fullname>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Hyperion Elements Jacket</itemname>
+			<size>XS</size>
+			<color>Green</color>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddPerformaceSportswearItemAndCheckout_TC05>
+
+		<AddEcoCollectionItemAndCheckout_TC06>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Bruno Compete Hoodie</itemname>
+			<size>XS</size>
+			<color>Green</color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddEcoCollectionItemAndCheckout_TC06>
+
+		<AddLumaLatestItemAndCheckout_TC07>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Wayfarer Messenger Bag</itemname>
+			<size></size>
+			<color></color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddLumaLatestItemAndCheckout_TC07>
+
+		<AddNewLumaYogaItemAndCheckout_TC08>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname></itemname>
+			<size></size>
+			<color></color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddNewLumaYogaItemAndCheckout_TC08>
+
+		<AddWomenTeeItemAndCheckout_TC09>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Desiree Fitness Tee</itemname>
+			<size>XS</size>
+			<color>Black</color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddWomenTeeItemAndCheckout_TC09>
+
+		<AddWomenPantItemAndCheckout_TC10>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Portia Capri</itemname>
+			<size>28</size>
+			<color>Blue</color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddWomenPantItemAndCheckout_TC10>
+
+		<AddMenLumaPerformanceCollectionItemAndCheckout_TC11>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname></itemname>
+			<size></size>
+			<color></color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddMenLumaPerformanceCollectionItemAndCheckout_TC11>
+
+		<AddMenTeeCollectionItemAndCheckout_TC12>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Strike Endurance Tee</itemname>
+			<size>S</size>
+			<color>Black</color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddMenTeeCollectionItemAndCheckout_TC12>
+
+		<AddMenPantCollectionItemAndCheckout_TC13>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Aether Gym Pant</itemname>
+			<size>34</size>
+			<color>Brown</color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddMenPantCollectionItemAndCheckout_TC13>
+
+		<AddMenShortCollectionItemAndCheckout_TC14>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Sol Active Short</itemname>
+			<size>33</size>
+			<color>Green</color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddMenShortCollectionItemAndCheckout_TC14>
+
+		<AddMenTeeCollectionItemAndCheckout_TC15>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Strike Endurance Tee</itemname>
+			<size>S</size>
+			<color>Black</color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddMenTeeCollectionItemAndCheckout_TC15>
+	
+		<AddWomenErinRecommendedItemAndCheckout_TC16>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Erika Running Short</itemname>
+			<size>28</size>
+			<color>Green</color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddWomenErinRecommendedItemAndCheckout_TC16>
+			
+		<AddWomenPantCollectionItemAndCheckout_TC17>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Portia Capri</itemname>
+			<size>28</size>
+			<color>Blue</color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddWomenPantCollectionItemAndCheckout_TC17>
+	
+		<AddMenHoodieItemAndCheckout_TC18>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Hero Hoodie</itemname>
+			<size>XS</size>
+			<color>Green</color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddMenHoodieItemAndCheckout_TC18>
+		
+		<AddMenHotSellersItemAndCheckout_TC19>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Meteor Workout Short</itemname>
+			<size>33</size>
+			<color>Blue</color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddMenHotSellersItemAndCheckout_TC19>
+	
+		<AddGearYogaKitItemAndCheckout_TC20>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname></itemname>
+			<size></size>
+			<color></color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddGearYogaKitItemAndCheckout_TC20>
+	
+		<AddGearFitnessItemAndCheckout_TC21>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Sprite Foam Yoga Brick</itemname>
+			<size></size>
+			<color></color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddGearFitnessItemAndCheckout_TC21>
+	
+		<AddGearPromoItemAndCheckout_TC22>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Dual Handle Cardio Ball</itemname>
+			<size></size>
+			<color></color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddGearPromoItemAndCheckout_TC22>
+	
+		<AddGearBagItemAndCheckout_TC23>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Push It Messenger Bag</itemname>
+			<size></size>
+			<color></color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddGearBagItemAndCheckout_TC23>
+	
+		<AddGearGymItemAndCheckout_TC24>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Dual Handle Cardio Ball</itemname>
+			<size></size>
+			<color></color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddGearGymItemAndCheckout_TC24>
+	
+		<AddGearWatchItemAndCheckout_TC25>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Bolo Sport Watch</itemname>
+			<size></size>
+			<color></color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddGearWatchItemAndCheckout_TC25>
+	
+		<AddGearHotSellerItemAndCheckout_TC26>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Affirm Water Bottle</itemname>
+			<size></size>
+			<color></color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddGearHotSellerItemAndCheckout_TC26>
+	
+		<AddTrainingErinRecommendedItemAndCheckout_TC27>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Erika Running Short</itemname>
+			<size>28</size>
+			<color>Green</color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+			
+		</AddTrainingErinRecommendedItemAndCheckout_TC27>
+	
+		<AddTrainingVideoAndCheckout_TC28>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname></itemname>
+			<size></size>
+			<color></color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Videos have been loaded</successDescription>
+			<failureDescription>There are no videos</failureDescription>
+		</AddTrainingVideoAndCheckout_TC28>
+	
+		<AddWomenShortsItemAndCheckout_TC29>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Erika Running Short</itemname>
+			<size>28</size>
+			<color>Green</color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddWomenShortsItemAndCheckout_TC29>
+	
+		<AddWomenBrasTanksItemAndCheckout_TC30>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Breathe-Easy Tank</itemname>
+			<size>XS</size>
+			<color>White</color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddWomenBrasTanksItemAndCheckout_TC30>
+	
+		<AddSalesWomenItemAndCheckout_TC31>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Maxima Drawstring Short</itemname>
+			<size>30</size>
+			<color>Yellow</color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddSalesWomenItemAndCheckout_TC31>
+	
+		<AddSalesMenItemAndCheckout_TC32>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Rapha Sports Short</itemname>
+			<size>36</size>
+			<color>Purple</color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddSalesMenItemAndCheckout_TC32>
+	
+		<AddSalesStealsItemAndCheckout_TC33>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Dual Handle Cardio Ball</itemname>
+			<size></size>
+			<color></color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddSalesStealsItemAndCheckout_TC33>
+		
+		<AddSalesWomenTeesAndCheckout_TC34>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Desiree Fitness Tee</itemname>
+			<size>XS</size>
+			<color>Black</color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddSalesWomenTeesAndCheckout_TC34>
+		
+		<AddWomenHotSellersAndCheckout_TC35>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Selene Yoga Hoodie</itemname>
+			<size>XL</size>
+			<color>Orange</color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Added to Cart</successDescription>
+			<failureDescription>Failed to Add Item to Cart</failureDescription>
+		</AddWomenHotSellersAndCheckout_TC35>
+		
+		<UpdateItemQuantityInCartAndHandleCosts_TC36>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Breathe-Easy Tank</itemname>
+			<size>XS</size>
+			<color>White</color>
+			<quantity>6</quantity>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Quantity Updated</successDescription>
+			<failureDescription>Failed to update quantity</failureDescription>
+		</UpdateItemQuantityInCartAndHandleCosts_TC36>
+		
+		<DeleteItemFromCartAndHandleCosts_TC37>
+			<fullname>wahaj dure</fullname>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Breathe-Easy Tank</itemname>
+			<size>XS</size>
+			<color>White</color>
+			<successDescription>Item Deleted from Cart</successDescription>
+			<failureDescription>Failed to delete Item from Cart</failureDescription>
+		</DeleteItemFromCartAndHandleCosts_TC37>
+		
+		<UpdateItemInCartMenu_TC38>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Push It Messenger Bag</itemname>
+			<quantity>5</quantity>
+			<size></size>
+			<color></color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Quantity Updated</successDescription>
+			<failureDescription>Failed to update quantity</failureDescription>
+		</UpdateItemInCartMenu_TC38>
+		<UpdateItemInCartMenu_TC38>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<itemname>Gwyn Endurance Tee</itemname>
+			<quantity>5</quantity>
+			<size>XL</size>
+			<color>Yellow</color>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Item Quantity Updated</successDescription>
+			<failureDescription>Failed to update quantity</failureDescription>
+		</UpdateItemInCartMenu_TC38>
+		
+		<CheckoutCart_TC39>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<fullname>wahaj dure</fullname>
+			<itemname>Push It Messenger Bag</itemname>
+			<size></size>
+			<color></color>
+			<successDescription>Checked Out</successDescription>
+			<failureDescription>Failed to check out</failureDescription>
+		</CheckoutCart_TC39>
+		
+		<EditAccountInformation_TC40>
+			<email>wahajdure@gmail.com</email>
+			<password>W@hajD!re</password>
+			<newFirstName>durewahaj</newFirstName>
+			<fullname>wahaj dure</fullname>
+			<successDescription>Account Information updated</successDescription>
+			<failureDescription>Failed to update information</failureDescription>
+		</EditAccountInformation_TC40>
+		
+		<EditAddressInformation_TC41>
+			<email>try111@gmail.com</email>
+			<password>D!resameenwaseem</password>
+			<streetAddress>durewahajw</streetAddress>
+			<fullname>durewahaj dure</fullname>
+			<successDescription>Account Information updated</successDescription>
+			<failureDescription>Failed to update information</failureDescription>
+		</EditAddressInformation_TC41>
+	
+	</Execution>
+</Automation>
