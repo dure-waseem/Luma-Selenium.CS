@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading;
 
 namespace Luma_Selenium
@@ -294,7 +295,7 @@ namespace Luma_Selenium
                 return false;
             }
         }
-        public static bool UpdateItemInCartByEditMenu(String productName, String newQuantity,String itemSize, String itemColor, bool swatchOptions)
+        public static bool UpdateItemInCartByEditMenu(String productName, String newQuantity,String size, String color, bool swatchOptions)
         {
             Step = Test.CreateNode("Update Cart Item");
             Thread.Sleep(2000);
@@ -307,7 +308,37 @@ namespace Luma_Selenium
                 Click(editButton, "Click Edit Button");
                 if (swatchOptions)
                 {
-
+                    try
+                    {
+                        IWebElement targetSizeSwatch = WaitForElement(driver, sizeSwatchLocator);
+                        IWebElement targetColorSwatch = WaitForElement(driver, ColorSwatchLocator);
+                        IList<IWebElement> sizeOptions = WaitForParentElements(targetSizeSwatch, sizeOptionsLocator);
+                        IList<IWebElement> colorOptions = WaitForParentElements(targetColorSwatch, colorOptionsLocator);
+                        IWebElement targetSize = null, targetColor = null;
+                        for (int i = 0; i < sizeOptions.Count; i++)
+                        {
+                            string itemSize = sizeOptions[i].Text;
+                            if (itemSize == size)
+                            {
+                                targetSize = sizeOptions[i];
+                            }
+                        }
+                        for (int i = 0; i < colorOptions.Count; i++)
+                        {
+                            string itemColor = colorOptions[i].GetAttribute(colorAttribute);
+                            if (itemColor == color)
+                            {
+                                targetColor = colorOptions[i];
+                            }
+                        }
+                        Click(targetSize, "Selected Target Size");
+                        Click(targetColor, "Selected Target Color");
+                    }catch(Exception ex)
+                    {
+                        RaiseException(ex);
+                        return false;
+                    }
+                    
                 }
                 IWebElement quantityBox = WaitForElement(driver, editQuantityInputLocator);
                 IJavaScriptExecutor js = (IJavaScriptExecutor)driver;

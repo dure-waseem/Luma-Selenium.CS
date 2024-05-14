@@ -9,27 +9,47 @@ namespace Luma_Selenium
 {
     public class EditPage : Navigator
     {
-        String pageTitle = "Edit Account Information";
-        String editNewUrl = "https://magento.softwaretestingboard.com/customer/account/edit/";
+        #region editPageLocators
+        private String pageTitle = "Edit Account Information";
+        private String editNewUrl = "https://magento.softwaretestingboard.com/customer/account/edit/";
+        private By nameTextboxLocator = By.Id("firstname");
+        private By saveLocator = By.CssSelector(".action.save.primary");
+        private By confirmationTextLocator = By.CssSelector(".message-success.success.message");
+        #endregion
 
-        public void EditButton(String newFirstName)
+        #region editPageMethods
+        public bool EditButton(String newFirstName)
         {
-            driver.Navigate().GoToUrl(editNewUrl);
-
-            VerifyPageOpen(pageTitle);
-            IWebElement nameTextbox = driver.FindElement(By.Id("firstname"));
-
-            nameTextbox.Clear();
-            nameTextbox.SendKeys(newFirstName);
-            Thread.Sleep(2000);
-            driver.FindElement(By.CssSelector(".action.save.primary")).Click();
-
-            string editConfirmationText = driver.FindElement(By.CssSelector(".message-success.success.message")).Text;
-            string expectedText = "You saved the account information.";
-            Assert.AreEqual(expectedText, editConfirmationText);
+            Step = Test.CreateNode("Account Information Page");
+            changeURL(editNewUrl);
+            bool changeStatus = VerifyPageOpen(pageTitle);
+            if (changeStatus)
+            {
+                try
+                {
+                    IWebElement nameTextbox = WaitForElement(driver, nameTextboxLocator);
+                    Clear(nameTextbox);
+                    Write(nameTextbox, newFirstName, "Rewrite First Name");
+                    IWebElement saveButton = WaitForElement(driver, saveLocator);
+                    Click(saveButton, "Click save");
+                    IWebElement confirmationBox = WaitForElement(driver, confirmationTextLocator);
+                    string editConfirmationText = confirmationBox.Text;
+                    string expectedText = "You saved the account information.";
+                    Assert.AreEqual(expectedText, editConfirmationText);
+                    return true;
+                }catch(Exception ex)
+                {
+                    RaiseException(ex);
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
 
         }
 
-
+        #endregion
     }
 }

@@ -1374,7 +1374,15 @@ namespace Luma_Selenium
             HandleStatus(loginStatus, "Logged in Successfully", "Log in failed");
             if (loginStatus)
             {
-                bool addStatus = gearPage.BagItem(itemname, size, color);
+                bool addStatus;
+                if (size != "" && color != "")
+                {
+                    addStatus = womenPage.WomenTeeCollection(itemname, size, color);
+                }
+                else
+                {
+                    addStatus = gearPage.BagItem(itemname, size, color);
+                }
                 HandleStatus(addStatus, "Item Bought", "Failed to Buy Item");
                 if (addStatus)
                 {
@@ -1398,12 +1406,34 @@ namespace Luma_Selenium
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "Data.xml", "CheckoutCart_TC39", DataAccessMethod.Sequential)]
         public void CheckoutCart_TC39()
         {
-            Step = Test.CreateNode("Proceed To Checkout");
             String email = TestContext.DataRow["email"].ToString();
             String password = TestContext.DataRow["password"].ToString();
-            loginPage.Login(email, password);
-            ItemAnalyzer.CheckoutPageByCartMenu();
-            TakeScreenshot(Status.Pass, "Cart Cleared");
+            String fullname = TestContext.DataRow["fullname"].ToString();
+            String itemname = TestContext.DataRow["itemname"].ToString();
+            String size = TestContext.DataRow["size"].ToString();
+            String color = TestContext.DataRow["color"].ToString();
+            String successDescription = TestContext.DataRow["successDescription"].ToString();
+            String failureDescription = TestContext.DataRow["failureDescription"].ToString();
+            bool loginStatus = loginPage.Login(email, password, fullname);
+            HandleStatus(loginStatus, "Logged in Successfully", "Log in failed");
+            if (loginStatus)
+            {
+                bool addStatus = gearPage.BagItem(itemname, size, color);
+                HandleStatus(addStatus, "Item Bought", "Failed to Buy Item");
+                if (addStatus)
+                {
+                    bool itemUpdateStatus = ItemAnalyzer.CheckoutPageByCartMenu();
+                    HandleStatus(itemUpdateStatus, successDescription, failureDescription);
+                }
+                else
+                {
+                    Console.WriteLine("Failed to Add Item to Cart");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Login Failed!");
+            }
         }
 
         [TestMethod]
@@ -1412,14 +1442,23 @@ namespace Luma_Selenium
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "Data.xml", "EditAccountInformation_TC40", DataAccessMethod.Sequential)]
         public void EditAccountInformation_TC40()
         {
-            Step = Test.CreateNode("Edit Account Information");
             String email = TestContext.DataRow["email"].ToString();
             String password = TestContext.DataRow["password"].ToString();
+            String fullname = TestContext.DataRow["fullname"].ToString();
             String newFirstName = TestContext.DataRow["newFirstName"].ToString();
-            loginPage.Login(email, password);
-            myAccountPage.EditButtonPage(newFirstName);
-            TakeScreenshot(Status.Pass, "Edit First Name");
-            Thread.Sleep(1000);
+            String successDescription = TestContext.DataRow["successDescription"].ToString();
+            String failureDescription = TestContext.DataRow["failureDescription"].ToString();
+            bool loginStatus = loginPage.Login(email, password, fullname);
+            HandleStatus(loginStatus, "Logged in Successfully", "Log in failed");
+            if (loginStatus)
+            {
+                bool editStatus = myAccountPage.EditButtonPage(newFirstName);
+                HandleStatus(editStatus, successDescription, failureDescription);
+            }
+            else
+            {
+                Console.WriteLine("Login Failed!");
+            }
         }
 
         [TestMethod]
@@ -1428,14 +1467,24 @@ namespace Luma_Selenium
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "Data.xml", "EditAddressInformation_TC41", DataAccessMethod.Sequential)]
         public void EditAddressInformation_TC41()
         {
-            Step = Test.CreateNode("Edit Addres Information");
             String email = TestContext.DataRow["email"].ToString();
             String password = TestContext.DataRow["password"].ToString();
+            String fullname = TestContext.DataRow["fullname"].ToString();
             String streetAddress = TestContext.DataRow["streetAddress"].ToString();
-            loginPage.Login(email, password);
-            myAccountPage.ManageAddressPage(streetAddress);
-            TakeScreenshot(Status.Pass, "Edit Street Address");
-            Thread.Sleep(1000);
+            String successDescription = TestContext.DataRow["successDescription"].ToString();
+            String failureDescription = TestContext.DataRow["failureDescription"].ToString();
+            bool loginStatus = loginPage.Login(email, password, fullname);
+            HandleStatus(loginStatus, "Logged in Successfully", "Log in failed");
+            if (loginStatus)
+            {
+                bool editStatus = myAccountPage.ManageAddressPage(streetAddress);
+                HandleStatus(editStatus, successDescription, failureDescription);
+            }
+            else
+            {
+                Console.WriteLine("Login Failed!");
+            }
+            
         }
         #endregion
     }

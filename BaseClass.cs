@@ -207,5 +207,9 @@ namespace Luma_Selenium
                 TakeScreenshot(Status.Fail, failureMessage);
             }
         }
+        public static void changeURL(String URL)
+        {
+            driver.Navigate().GoToUrl(URL);
+        }
     }
 }

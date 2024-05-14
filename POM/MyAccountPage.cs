@@ -10,46 +10,50 @@ namespace Luma_Selenium
 {
     public class MyAccountPage : Navigator
     {
-        #region TrainingLocators
-        By navLocator = By.Id("customer-name");
-        String PageTitle = "My Account";
-        String accountNewUrl = "https://magento.softwaretestingboard.com/customer/account/";
+        #region AccountPageLocators
+        private By navLocator = By.Id("customer-name");
+        private String PageTitle = "My Account";
+        private By accountPageLocator = By.CssSelector(".action.switch");
+        private String accountNewUrl = "https://magento.softwaretestingboard.com/customer/account/";
 
         #endregion
 
-        #region TrainingMethods
-        public void EditButtonPage(String newFirstName)
+        #region AccountPageMethods
+        public bool EditButtonPage(String newFirstName)
         {
-            Thread.Sleep(2000);
-            driver.FindElement(By.CssSelector(".action.switch")).Click();
-            Thread.Sleep(2000);
-            driver.Navigate().GoToUrl(accountNewUrl);
-            VerifyPageOpen(PageTitle);
-            EditPage editPage = new EditPage();
-            editPage.EditButton(newFirstName);
+            Step = Test.CreateNode("Edit Account Information");
+            IWebElement accountNav = WaitForElement(driver, accountPageLocator);
+            Click(accountNav, "Open Account Page");
+            changeURL(accountNewUrl);
+            bool pageChangeStatus = VerifyPageOpen(PageTitle);
+            if (pageChangeStatus)
+            {
+                EditPage editPage = new EditPage();
+                return editPage.EditButton(newFirstName);
+            }
+            else
+            {
+                return false;
+            }
         }
-        public void ManageAddressPage(String streetAddress)
+        public bool ManageAddressPage(String streetAddress)
         {
-            Thread.Sleep(2000);
-            driver.FindElement(By.CssSelector(".action.switch")).Click();
-            Thread.Sleep(2000);
-            driver.Navigate().GoToUrl(accountNewUrl);
-            VerifyPageOpen(PageTitle);
-            ManageAddressPage manageAddressPage = new ManageAddressPage();
-            manageAddressPage.ManageButton(streetAddress);
-
-
-
-
-
-
+            Step = Test.CreateNode("Edit Addres Information");
+            IWebElement accountNav = WaitForElement(driver, accountPageLocator);
+            Click(accountNav, "Open Account Page");
+            changeURL(accountNewUrl);
+            bool pageChangeStatus = VerifyPageOpen(PageTitle);
+            if (pageChangeStatus)
+            {
+                ManageAddressPage manageAddressPage = new ManageAddressPage();
+                return manageAddressPage.ManageButton(streetAddress);
+            }
+            else
+            {
+                return false;
+            }
+            
         }
-
-
-
         #endregion
-
-
-
     }
 }
