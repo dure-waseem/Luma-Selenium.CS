@@ -38,7 +38,7 @@ namespace Luma_Selenium
         }
         public static void TakeScreenshot(Status status, string stepDetail)
         {
-            string path = @"C:\ExtentReports\images" + DateTime.Now.ToString("yyyyMMHHmmss") + ".png";
+            string path = @"E:\Luma-Selenium\ExtentReports\images" + DateTime.Now.ToString("yyyyMMHHmmss") + ".png";
             Screenshot screenshot = ((ITakesScreenshot)driver).GetScreenshot();
             File.WriteAllBytes(path, screenshot.AsByteArray);
             Step.Log(status, stepDetail, MediaEntityBuilder.CreateScreenCaptureFromPath(path).Build());

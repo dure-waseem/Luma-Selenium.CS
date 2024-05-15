@@ -44,7 +44,7 @@ namespace Luma_Selenium
             trainingPage = new TrainingPage();
             salesPage = new SalesPage();
             myAccountPage = new MyAccountPage();
-            string ResultFile = @"C:\ExtentReports\TestExecLog_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".html";
+            string ResultFile = @"E:\Luma-Selenium\ExtentReports\TestExecLog_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".html";
             CreateReport(ResultFile);
         }
 
